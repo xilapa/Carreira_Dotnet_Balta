@@ -13,13 +13,13 @@ public class ExemploDapper
         var dapperRepo = new DapperRepository(Constants.SQL_SERVER_CONNECTION_STRING);
 
         var queryInsert = @"INSERT INTO Category
-                            VALUES(@Id, @Title, @Url, @Summary, @Order, @Description, @Featured)";
+                            OUTPUT inserted.Id
+                            VALUES(NEWID(), @Title, @Url, @Summary, @Order, @Description, @Featured);";
 
-        #region SINGLE INSERT
+        #region SINGLE INSERT RETORNANDO O ID
         var categoria = new Category
                                     {
-                                        Id = Guid.NewGuid(),
-                                        Title = "Categoria Teste 5 - com transaction",
+                                        Title = "Categoria Teste retornando Id",
                                         Url = "link-do-bom.com",
                                         Summary = "muito bom",
                                         Order = 1,
@@ -27,13 +27,18 @@ public class ExemploDapper
                                         Featured = true
                                     };
 
-        var singleInsertResult = await dapperRepo
+        var IdInserido = await dapperRepo
                                     .UsingConnectionAsync(
-                                        (conn, tran) => conn.ExecuteAsync(queryInsert, categoria, tran)
+                                        (conn, tran) => conn.ExecuteScalarAsync<Guid>(queryInsert, categoria, tran)
                                     );
+        Console.WriteLine($"O Id inserido foi: {IdInserido}");
         #endregion
-        
+
         #region LIST INSERT
+
+        var queryInsertlist = @"INSERT INTO Category
+                                VALUES(@Id, @Title, @Url, @Summary, @Order, @Description, @Featured);";
+
         var listaCategorias = new Category[] {
             new Category {
                     Id = Guid.NewGuid(),
@@ -57,7 +62,7 @@ public class ExemploDapper
 
         var listInsertResult =  await dapperRepo
                                     .UsingConnectionAsync(
-                                        (conn, tran) => conn.ExecuteAsync(queryInsert, listaCategorias, tran)
+                                        (conn, tran) => conn.ExecuteAsync(queryInsertlist, listaCategorias, tran)
                                     );
         #endregion
 
