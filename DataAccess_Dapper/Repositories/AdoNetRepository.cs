@@ -3,6 +3,7 @@ using Microsoft.Data.SqlClient;
 using System.Threading.Tasks;
 using System.Data;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace DataAccess_Dapper.Repositories;
 
@@ -14,6 +15,7 @@ public class AdoNetRepository
         _connectionString = connectionString;
     }
     
+    [SuppressMessage("Suggestion", "IDE0063: 'using' statement can be simplified", Justification = "Using simplicado dificulta o entendimento do código")]
     public async Task UsingConnectionAsync(string query, Action<SqlDataReader> action)
     {
         using(var connection = new SqlConnection(_connectionString))
