@@ -46,4 +46,30 @@ public class DapperRepository
             }            
         }
     }
+
+    
+    public static async Task<T> UsingStaticConnectionAsync<T>(string connectionString, Func<IDbConnection, IDbTransaction, Task<T>> func)
+    {
+        using(var connection = new SqlConnection(connectionString))
+        {
+            if(connection.State == ConnectionState.Closed)
+                await connection.OpenAsync();
+
+            var transaction = await connection.BeginTransactionAsync();
+
+            try
+            {
+                var result = await func(connection, transaction);
+                await transaction.CommitAsync();
+                return result;
+            }
+            catch(Exception)
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }            
+        }
+    }
+
+
 }

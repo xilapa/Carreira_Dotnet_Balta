@@ -79,4 +79,45 @@ public class ExemploDapper
         }
         #endregion
     }
+
+    public static async Task MultiplasConexoesAoBanco()
+    {
+        var tarefa_um = Task.Run( async () => 
+        {
+            return await DapperRepository
+            .UsingStaticConnectionAsync(Constants.SQL_SERVER_CONNECTION_STRING, 
+            (connection, transaction) => {
+                return connection.QueryAsync("SELECT Id, Title FROM Category", param: null, transaction);
+            }
+            );
+        });
+
+        var tarefa_dois = Task.Run(async () =>
+        {
+            return await DapperRepository
+                .UsingStaticConnectionAsync(Constants.SQL_SERVER_CONNECTION_STRING,
+                (connection, transaction) =>
+                {
+                    return connection.QueryAsync("SELECT Id, Name FROM Author", param: null, transaction);
+                }
+                );
+        });
+
+        var tarefa_tres = DapperRepository
+            .UsingStaticConnectionAsync(Constants.SQL_SERVER_CONNECTION_STRING, 
+            (connection, transaction) => {
+                return connection.QueryAsync("SELECT Id, Title FROM Career", param: null, transaction);
+            }
+            );
+
+        var tarefa_quatro = DapperRepository
+            .UsingStaticConnectionAsync(Constants.SQL_SERVER_CONNECTION_STRING, 
+            (connection, transaction) => {
+                return connection.QueryAsync("SELECT Id, Title FROM Course", param: null, transaction);
+            }
+            );
+
+        var results = await Task.WhenAll(tarefa_um, tarefa_dois, tarefa_tres, tarefa_quatro);
+
+    }   
 }

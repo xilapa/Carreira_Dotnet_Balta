@@ -9,7 +9,8 @@ class Program
     static async Task Main(string[] args)
     {
         // await new ExemploADONet().Rodar();
-        await ExemploDapper.Rodar();
+        // await ExemploDapper.Rodar();
+        await ExemploDapper.MultiplasConexoesAoBanco();
     }
 }
 
