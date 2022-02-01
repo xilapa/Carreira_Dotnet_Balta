@@ -196,4 +196,30 @@ public class ExemploDapper
 
     } 
 
+    public static async Task SelectIn() 
+    {
+        var dapperRepo = new DapperRepository(Constants.SQL_SERVER_CONNECTION_STRING);
+
+        var query = @"SELECT * FROM Category 
+                    WHERE Id IN @Id";
+
+        var result = await dapperRepo.UsingConnectionAsync(
+            (conn, tran) =>
+            {
+                return conn.QueryAsync<Category>(
+                    query,
+                    param: new { Id = new[]{
+                                            "a6fd1aae-b4d0-4312-a821-03188c587a27",
+                                            "898304cc-9e93-418d-8a05-184d7bf91846",
+                                            "af3407aa-11ae-4621-a2ef-2028b85507c4",
+                                            "cb78ca32-e64c-4962-89f8-252ef248c3d8",
+                                            "09ce0b7b-cfca-497b-92c0-3290ad9d5142",
+                                            }
+                                }, 
+                    transaction: tran
+                );
+            }
+        );
+    }
+
 }

@@ -13,7 +13,8 @@ class Program
         // await ExemploDapper.MultiplasConexoesAoBanco();
         // await ExemploDapper.OneToOne();
         // await ExemploDapper.OneToMany();
-        await ExemploDapper.MultipleQueries();
+        // await ExemploDapper.MultipleQueries();
+        await ExemploDapper.SelectIn();
     }
 }
 
