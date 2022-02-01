@@ -10,7 +10,8 @@ class Program
     {
         // await new ExemploADONet().Rodar();
         // await ExemploDapper.Rodar();
-        await ExemploDapper.MultiplasConexoesAoBanco();
+        // await ExemploDapper.MultiplasConexoesAoBanco();
+        await ExemploDapper.OneToOne();
     }
 }
 

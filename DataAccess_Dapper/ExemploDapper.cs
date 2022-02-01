@@ -120,4 +120,24 @@ public class ExemploDapper
         var results = await Task.WhenAll(tarefa_um, tarefa_dois, tarefa_tres, tarefa_quatro);
 
     }   
+
+    public static async Task OneToOne() 
+    {
+        var dapperRepo = new DapperRepository(Constants.SQL_SERVER_CONNECTION_STRING);
+
+        var query = @"SELECT * FROM CareerItem 
+                    INNER JOIN Course ON CareerItem.CourseId = Course.Id";
+
+        var result = await dapperRepo.UsingConnectionAsync(
+            (conn, tran) =>
+            {
+                return conn.QueryAsync<CareerItem, Course, CareerItem>(query,
+                    (carerItem, course) => {
+                        carerItem.Course = course;
+                        return carerItem;
+                    }
+                 , transaction: tran, splitOn: "Id");
+            }
+        );
+    }
 }
