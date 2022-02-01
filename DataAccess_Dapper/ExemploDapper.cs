@@ -175,4 +175,25 @@ public class ExemploDapper
             }
         );
     }
+
+    public static async Task MultipleQueries()
+    {
+        var dapperRepo = new DapperRepository(Constants.SQL_SERVER_CONNECTION_STRING);
+        var query = "SELECT * FROM Course; SELECT * FROM Category;";
+
+        IEnumerable<Course> courses;
+        IEnumerable<Category> categories;
+        await dapperRepo.UsingConnectionAsync(
+            async (conn, tran) =>
+            {
+                using (var reader = await conn.QueryMultipleAsync(query, transaction: tran))
+                {
+                    courses = await reader.ReadAsync<Course>();
+                    categories = await reader.ReadAsync<Category>();
+                }                
+            }
+        );        
+
+    } 
+
 }
