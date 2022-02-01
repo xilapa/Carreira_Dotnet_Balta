@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using DataAccess_Dapper.Models;
@@ -137,6 +139,39 @@ public class ExemploDapper
                         return carerItem;
                     }
                  , transaction: tran, splitOn: "Id");
+            }
+        );
+    }
+
+     public static async Task OneToMany() 
+    {
+        var dapperRepo = new DapperRepository(Constants.SQL_SERVER_CONNECTION_STRING);
+
+        var query = @"SELECT Career.Id, Career.Title, CareerItem.CareerId, CareerItem.Title
+                    FROM Career 
+                    INNER JOIN CareerItem ON CareerItem.CareerId = Career.Id";
+
+        var careers = new List<Career>();
+        var result = await dapperRepo.UsingConnectionAsync(
+            (conn, tran) =>
+            {
+                return conn.QueryAsync<Career, CareerItem, Career>(query,
+                    (career, careerItem) => {
+                        var actualCareer = careers.SingleOrDefault(c => c.Id == career.Id);
+                        if (actualCareer is null)
+                        {
+                            actualCareer = career;
+                            actualCareer.Items.Add(careerItem);
+                            careers.Add(actualCareer);
+                        }
+                        else
+                        {
+                            actualCareer.Items.Add(careerItem);
+                        }          
+                        career.Items.Add(careerItem);
+                        return career;
+                    }
+                 , transaction: tran, splitOn: "CareerId");
             }
         );
     }
