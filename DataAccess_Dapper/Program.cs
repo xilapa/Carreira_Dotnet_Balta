@@ -14,7 +14,8 @@ class Program
         // await ExemploDapper.OneToOne();
         // await ExemploDapper.OneToMany();
         // await ExemploDapper.MultipleQueries();
-        await ExemploDapper.SelectIn();
+        // await ExemploDapper.SelectIn();
+        await ExemploDapper.ManyToMany();
     }
 }
 

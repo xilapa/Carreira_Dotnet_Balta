@@ -222,4 +222,40 @@ public class ExemploDapper
         );
     }
 
+    public static async Task ManyToMany()
+    {
+        var dapperRepo = new DapperRepository(Constants.SQL_SERVER_CONNECTION_STRING);
+
+        var query = @"SELECT Blog.*, Tag.* FROM Blogs as Blog 
+                    LEFT JOIN BlogTags ON BlogTags.BlogId = Blog.Id
+                    LEFT JOIN Tags as Tag ON Tag.Id = BlogTags.TagId";
+
+        var blogs = new List<Blog>();
+        var result = await dapperRepo.UsingConnectionAsync(
+            (conn, tran) =>
+            {
+                return conn.QueryAsync<Blog, Tag, Blog>(query,
+                    (blog, tag) => {
+                        var currentBlog = blogs.FirstOrDefault(b => b.Id == blog.Id);
+                        if(currentBlog is null)
+                        {
+                            currentBlog = blog;
+
+                            if(tag is not null)
+                                currentBlog.Tags.Add(tag);
+                                
+                            blogs.Add(currentBlog);
+                        }
+                        else 
+                        {
+                            currentBlog.Tags.Add(tag);                            
+                        }
+                    
+                        return blog;
+                    }
+                 , transaction: tran, splitOn: "Id");
+            }
+        );
+    }
+
 }
