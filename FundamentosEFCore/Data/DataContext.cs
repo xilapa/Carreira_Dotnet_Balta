@@ -1,3 +1,4 @@
+using System;
 using FundamentosEFCore.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +14,9 @@ public class DataContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
-        
+
+        optionsBuilder.LogTo(Console.WriteLine);
+
         if (!optionsBuilder.IsConfigured)
             optionsBuilder.UseInMemoryDatabase("TestDb");
     }
