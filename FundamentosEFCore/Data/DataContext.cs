@@ -21,6 +21,18 @@ public class DataContext : DbContext
             optionsBuilder.UseInMemoryDatabase("TestDb");
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<PostTagCount>(x =>
+        {
+            x.ToSqlQuery(@" SELECT Title, 
+                            SELECT COUNT (Id) FROM Tags WHERE PostId = Id AS TagCount
+                            FROM Posts ");
+        });
+    }
+
     public DbSet<Category> Categories { get; set; }
     public DbSet<Post> Posts { get; set; }
     // public DbSet<PostTag> PostTags { get; set; }
