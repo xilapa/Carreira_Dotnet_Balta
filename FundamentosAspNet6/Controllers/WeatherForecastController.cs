@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using FundamentosAspNet6.Attributes;
 
 namespace FundamentosAspNet6.Controllers;
 
+[ApiKey]
 [ApiController]
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
