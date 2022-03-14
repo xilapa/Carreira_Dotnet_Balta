@@ -1,6 +1,8 @@
+using PaymentContext.Shared.Entites;
+
 namespace PaymentContext.Domain.Entities;
 
-public class Subscription
+public class Subscription : Entity
 {
     public Subscription(DateTime? expireDate)
     {
