@@ -1,6 +1,8 @@
+using PaymentContext.Shared.Notifications;
+
 namespace PaymentContext.Shared.Entites;
 
-public abstract class Entity
+public abstract class Entity : Notifiable
 {
     public Guid Id { get; private set; }
 
