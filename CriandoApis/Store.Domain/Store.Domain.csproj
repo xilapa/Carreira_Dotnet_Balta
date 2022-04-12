@@ -4,6 +4,16 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
+    <Authors>Xilapa</Authors>
+    <Company>Xilapa</Company>
+    <Description>Xilapa Store</Description>
+    <PackageLicenseUrl>https://www.gnu.org/licenses/gpl-3.0.en.html</PackageLicenseUrl>
+    <PackageProjectUrl>https://xilapa.com</PackageProjectUrl>
+    <PackageIconUrl>https://xilapa.com/favicon.ico</PackageIconUrl>
+    <RepositoryUrl>https://github.com/xilapa</RepositoryUrl>
   </PropertyGroup>
 
 </Project>
