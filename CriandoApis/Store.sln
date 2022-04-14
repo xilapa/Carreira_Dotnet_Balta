@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Store.Domain", "Store.Domai
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Store.Tests", "Store.Tests\Store.Tests.csproj", "{03271EE4-EEE0-40F2-B202-F01535EB7317}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Store.Shared", "Store.Shared\Store.Shared.csproj", "{B9BA5809-2EC2-4491-8E84-4AC583E6B104}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{03271EE4-EEE0-40F2-B202-F01535EB7317}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03271EE4-EEE0-40F2-B202-F01535EB7317}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03271EE4-EEE0-40F2-B202-F01535EB7317}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9BA5809-2EC2-4491-8E84-4AC583E6B104}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9BA5809-2EC2-4491-8E84-4AC583E6B104}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9BA5809-2EC2-4491-8E84-4AC583E6B104}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9BA5809-2EC2-4491-8E84-4AC583E6B104}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

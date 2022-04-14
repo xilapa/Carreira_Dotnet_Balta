@@ -16,4 +16,8 @@
     <RepositoryUrl>https://github.com/xilapa</RepositoryUrl>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Store.Shared\Store.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
