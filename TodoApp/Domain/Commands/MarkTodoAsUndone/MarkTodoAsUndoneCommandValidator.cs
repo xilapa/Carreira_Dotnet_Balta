@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace TodoApp.Domain.Commands;
+namespace TodoApp.Domain.Commands.MarkTodoAsUndone;
 
-public class MarkTodoAsUnDoneCommandValidator : AbstractValidator<MarkTodoAsUnDoneCommand>
+public class MarkTodoAsUndoneCommandValidator : AbstractValidator<MarkTodoAsUndoneCommand>
 {
-    public MarkTodoAsUnDoneCommandValidator()
+    public MarkTodoAsUndoneCommandValidator()
     {
         RuleFor(c => c.Id)
             .NotEmpty().WithMessage("O id do todo não pode ser vazio");

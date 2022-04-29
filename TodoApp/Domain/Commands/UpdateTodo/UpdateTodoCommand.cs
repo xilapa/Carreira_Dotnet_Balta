@@ -1,4 +1,6 @@
-﻿namespace TodoApp.Domain.Commands;
+﻿using TodoApp.Domain.Commands.Base;
+
+namespace TodoApp.Domain.Commands.UpdateTodo;
 
 public class UpdateTodoCommand : Command<UpdateTodoCommand>
 {

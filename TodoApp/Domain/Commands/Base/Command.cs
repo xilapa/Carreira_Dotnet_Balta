@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using TodoApp.Domain.Commands.Contracts;
 
-namespace TodoApp.Domain.Commands;
+namespace TodoApp.Domain.Commands.Base;
 
 public abstract class Command<T> : ICommand where T : class
 {

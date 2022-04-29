@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace TodoApp.Domain.Commands;
+namespace TodoApp.Domain.Commands.UpdateTodo;
 
-public class CreateTodoCommandValidator : AbstractValidator<CreateTodoCommand>
+public class UpdateTodoCommandValidator : AbstractValidator<UpdateTodoCommand>
 {
-    public CreateTodoCommandValidator()
+    public UpdateTodoCommandValidator()
     {
         RuleFor(c => c.Title)
             .NotEmpty().WithMessage("O título é obrigatório")

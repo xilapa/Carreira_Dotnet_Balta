@@ -1,6 +1,6 @@
 ﻿using TodoApp.Domain.Commands.Contracts;
 
-namespace TodoApp.Domain.Commands;
+namespace TodoApp.Domain.Commands.Base;
 
 public class CommandResult : ICommandResult
 {

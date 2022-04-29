@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace TodoApp.Domain.Commands;
+namespace TodoApp.Domain.Commands.MarkTodoAsDone;
 
 public class MarkTodoAsDoneCommandValidator : AbstractValidator<MarkTodoAsDoneCommand>
 {
