@@ -16,6 +16,7 @@ public abstract class Command<T> : ICommand where T : class
         _validator = validator;
         _errors = new List<string>();
     }
+
     public IReadOnlyCollection<string> Errors => _errors.ToArray();
 
     public bool Validate()
