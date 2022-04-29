@@ -1,7 +1,4 @@
-﻿using FluentValidation;
-using TodoApp.Domain.Commands.Contracts;
-
-namespace TodoApp.Domain.Commands;
+﻿namespace TodoApp.Domain.Commands;
 
 public class CreateTodoCommand : Command<CreateTodoCommand>
 {
