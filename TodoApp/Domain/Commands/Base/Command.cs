@@ -6,18 +6,20 @@ namespace TodoApp.Domain.Commands.Base;
 public abstract class Command<T> : ICommand where T : class
 {
     private readonly AbstractValidator<T> _validator;
-    private List<string> _errors { get; set; }
+    private readonly List<string> _errors;
 
     protected Command(AbstractValidator<T> validator)
     {
-        if(validator is null)
-            throw new ArgumentNullException(nameof(validator));
-
-        _validator = validator;
+        _validator = validator ?? throw new ArgumentNullException(nameof(validator));
         _errors = new List<string>();
     }
 
     public IReadOnlyCollection<string> Errors => _errors.ToArray();
+
+    public bool Valid => _errors.Count == 0;
+    public bool InValid => !Valid;
+    public bool IsInvalid() => !Validate();
+    public bool IsValid() => Validate();
 
     public bool Validate()
     {
