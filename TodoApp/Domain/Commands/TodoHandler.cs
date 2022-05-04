@@ -9,12 +9,12 @@ using TodoApp.Domain.Entities;
 
 namespace Domain.Commands;
 
-public class Handler : BaseHandler, IHandler<CreateTodoCommand>, IHandler<UpdateTodoCommand>, IHandler<MarkTodoAsDoneCommand>, IHandler<MarkTodoAsUndoneCommand>
+public class TodoHandler : BaseHandler, IHandler<CreateTodoCommand>, IHandler<UpdateTodoCommand>, IHandler<MarkTodoAsDoneCommand>, IHandler<MarkTodoAsUndoneCommand>
 {
     private readonly ITodoRepository _todoRepository;
     private readonly IUnitOfWork _uow;
 
-    public Handler(ITodoRepository todoRepository, IUnitOfWork uow)
+    public TodoHandler(ITodoRepository todoRepository, IUnitOfWork uow)
     {
         _todoRepository = todoRepository;
         _uow = uow;

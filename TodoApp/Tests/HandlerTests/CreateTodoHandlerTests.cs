@@ -1,31 +1,30 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Domain.Commands;
-using Domain.Repositories;
 using FluentAssertions;
-using Tests.Repositories;
 using TodoApp.Domain.Commands.CreateTodo;
+using TodoApp.Tests.Repositories;
 using Xunit;
 
-namespace Tests.HandlerTests;
+namespace TodoApp.Tests.HandlerTests;
 
 public class CreateTodoHandlerTestsBase
 {
-    public readonly Handler Handler;
+    public readonly TodoHandler TodoHandler;
 
     public CreateTodoHandlerTestsBase()
     {
-        Handler = new Handler(new FakeTodoRepository(), new FakeUnitOfWork());
+        TodoHandler = new TodoHandler(new FakeTodoRepository(), new FakeUnitOfWork());
     }
 }
 
 public class CreateTodoHandlerTests : IClassFixture<CreateTodoHandlerTestsBase>
 {
-    private readonly CreateTodoHandlerTestsBase @base;
+    private readonly CreateTodoHandlerTestsBase _base;
 
     public CreateTodoHandlerTests(CreateTodoHandlerTestsBase fixture)
     {
-        @base = fixture;
+        _base = fixture;
     }
 
     [Fact]
@@ -35,7 +34,7 @@ public class CreateTodoHandlerTests : IClassFixture<CreateTodoHandlerTestsBase>
         var command = new CreateTodoCommand("", Guid.Empty, DateTime.Now);
 
         // Act
-        var result = await @base.Handler.Handle(command);
+        var result = await _base.TodoHandler.Handle(command);
 
         // Assert
         result.Success.Should().BeFalse();
@@ -48,7 +47,7 @@ public class CreateTodoHandlerTests : IClassFixture<CreateTodoHandlerTestsBase>
         var command = new CreateTodoCommand("titulo", Guid.NewGuid(), DateTime.Now);
 
         // Act
-        var result = await @base.Handler.Handle(command);
+        var result = await _base.TodoHandler.Handle(command);
 
         // Assert
         result.Success.Should().BeTrue();

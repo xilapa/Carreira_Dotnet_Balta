@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Domain.Repositories;
 
-namespace Tests.Repositories;
+namespace TodoApp.Tests.Repositories;
 
 public class FakeUnitOfWork : IUnitOfWork
 {

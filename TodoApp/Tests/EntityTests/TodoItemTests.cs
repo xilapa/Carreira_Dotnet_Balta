@@ -3,7 +3,7 @@ using FluentAssertions;
 using TodoApp.Domain.Entities;
 using Xunit;
 
-namespace Tests.EntityTests;
+namespace TodoApp.Tests.EntityTests;
 
 public class TodoItemTests
 {
