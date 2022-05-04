@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Domain.Repositories;
 using TodoApp.Domain.Entities;
 
-namespace Tests.Repositories;
+namespace TodoApp.Tests.Repositories;
 
 public class FakeTodoRepository : ITodoRepository
 {
@@ -17,4 +17,24 @@ public class FakeTodoRepository : ITodoRepository
 
     public void Update(TodoItem todo)
     { }
+
+    public Task<TodoItem[]> GetAll(Guid user)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<TodoItem[]> GetAllDone(Guid user)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<TodoItem[]> GetAllUndone(Guid user)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<TodoItem[]> GetByDate(Guid user, DateTime date, bool done)
+    {
+        throw new NotImplementedException();
+    }
 }
