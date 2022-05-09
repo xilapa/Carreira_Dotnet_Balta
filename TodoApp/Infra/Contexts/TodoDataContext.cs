@@ -11,6 +11,7 @@ public class TodoDataContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<TodoItem>()
+            .ToTable("Todo")
             .HasKey(t => t.Id);
 
         modelBuilder.Entity<TodoItem>()
