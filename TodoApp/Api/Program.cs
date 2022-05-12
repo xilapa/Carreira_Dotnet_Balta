@@ -19,7 +19,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Infra
-builder.Services.AddDbContext<TodoDataContext>(opt => opt.UseInMemoryDatabase("testeDb"));
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<TodoDataContext>(opt => opt.UseSqlServer(connectionString));
 builder.Services.AddScoped<ITodoRepository, TodoRepository>();
 
 // Domain
