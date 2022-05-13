@@ -2,7 +2,9 @@ using Domain.Commands;
 using Domain.Repositories;
 using Infra.Contexts;
 using Infra.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using TodoApp.Domain.Commands.Contracts;
 using TodoApp.Domain.Commands.CreateTodo;
 using TodoApp.Domain.Commands.MarkTodoAsDone;
@@ -30,6 +32,21 @@ builder.Services.AddScoped<IHandler<CreateTodoCommand>>(s => s.GetRequiredServic
 builder.Services.AddScoped<IHandler<UpdateTodoCommand>>(s => s.GetRequiredService<TodoHandler>());
 builder.Services.AddScoped<IHandler<MarkTodoAsDoneCommand>>(s => s.GetRequiredService<TodoHandler>());
 builder.Services.AddScoped<IHandler<MarkTodoAsUndoneCommand>>(s => s.GetRequiredService<TodoHandler>());
+
+// Authentication
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(opt =>
+    {
+        opt.Authority = "https://securetoken.google.com/todoapp-curso-balta";
+        opt.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = "https://securetoken.google.com/todoapp-curso-balta",
+            ValidateAudience = true,
+            ValidAudience = "todoapp-curso-balta",
+            ValidateLifetime = true
+        };
+    });
 
 var app = builder.Build();
 
