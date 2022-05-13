@@ -21,6 +21,7 @@ builder.Services.AddSwaggerGen();
 // Infra
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<TodoDataContext>(opt => opt.UseSqlServer(connectionString));
+builder.Services.AddScoped<IUnitOfWork>(_ => _.GetRequiredService<TodoDataContext>());
 builder.Services.AddScoped<ITodoRepository, TodoRepository>();
 
 // Domain

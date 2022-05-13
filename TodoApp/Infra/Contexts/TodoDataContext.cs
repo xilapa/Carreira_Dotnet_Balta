@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
 using TodoApp.Domain.Entities;
 
 namespace Infra.Contexts;
 
-public class TodoDataContext : DbContext
+public class TodoDataContext : DbContext, IUnitOfWork
 {
     public TodoDataContext(DbContextOptions<TodoDataContext> options) : base(options)
     { }
